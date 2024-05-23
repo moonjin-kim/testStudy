@@ -8,6 +8,7 @@ import com.example.test_study.model.dto.UserUpdateDto;
 import com.example.test_study.repository.UserEntity;
 import com.example.test_study.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
@@ -39,6 +41,7 @@ public class UserService {
 
     @Transactional
     public UserEntity createUser(UserCreateDto userCreateDto) {
+        log.info("create");
         UserEntity userEntity = new UserEntity();
         userEntity.setEmail(userCreateDto.getEmail());
         userEntity.setNickname(userCreateDto.getNickname());
@@ -67,10 +70,13 @@ public class UserService {
     public void verifyEmail(long id, String certificationCode) {
         UserEntity userEntity = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Users", id));
+        log.info(certificationCode);
+        log.info(userEntity.getCertificationCode());
         if (!certificationCode.equals(userEntity.getCertificationCode())) {
             throw new CertificationCodeNotMatchedException();
         }
         userEntity.setStatus(UserStatus.ACTIVE);
+        userRepository.save(userEntity);
     }
 
     private void sendCertificationEmail(String email, String certificationUrl) {
@@ -82,6 +88,6 @@ public class UserService {
     }
 
     private String generateCertificationUrl(UserEntity userEntity) {
-        return "http://localhost:8080/api/users/" + userEntity.getId() + "/verify?certificationCode=" + userEntity.getCertificationCode();
+        return "http://localhost:8080/api/v0/users/" + userEntity.getId() + "/verify?certificationCode=" + userEntity.getCertificationCode();
     }
 }

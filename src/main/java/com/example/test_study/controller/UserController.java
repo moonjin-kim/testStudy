@@ -1,15 +1,73 @@
 package com.example.test_study.controller;
 
+import com.example.test_study.model.dto.UserCreateDto;
+import com.example.test_study.model.dto.UserResponse;
+import com.example.test_study.model.dto.UserUpdateDto;
 import com.example.test_study.repository.UserEntity;
+import com.example.test_study.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
+import org.hibernate.annotations.Parameter;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v0/user")
+@RequestMapping("/api/v0/users")
 @RequiredArgsConstructor
 public class UserController {
+    private final UserService userService;
+
+    @ResponseStatus
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponse> getUserById(@PathVariable("id")  long id) {
+        return ResponseEntity
+                .ok()
+                .body(UserResponse.toResponse(userService.getByIdOrElseThrow(id)));
+    }
+
+    @GetMapping("/{id}/verify")
+    public ResponseEntity<Void> verifyEmail(
+            @PathVariable("id") long id,
+            @RequestParam("certificationCode") String certificationCode
+    ) {
+        userService.verifyEmail(id, certificationCode);
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .location(URI.create("http://localhost:3000"))
+                .build();
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserResponse> getMyInfo(
+            @RequestHeader("EMAIL") String email
+    ) {
+        return ResponseEntity
+                .ok()
+                .body(UserResponse.toResponse(userService.getByEmail(email)));
+    }
+
+
+    @PutMapping("/me")
+    public ResponseEntity<Long> updateUser(
+            @RequestHeader("ID") Long id,
+            @RequestBody UserUpdateDto request
+    ) {
+        return ResponseEntity
+                .ok()
+                .body(userService.updateUser(id,request).getId());
+    }
+
+    @PostMapping("")
+    public ResponseEntity<Long> createUser(
+            @RequestBody UserCreateDto request
+    ) {
+        return ResponseEntity
+                .ok()
+                .body(userService.createUser(request).getId());
+    }
+
 }
