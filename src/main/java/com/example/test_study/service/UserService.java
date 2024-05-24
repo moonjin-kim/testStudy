@@ -37,7 +37,6 @@ public class UserService {
 
     @Transactional
     public UserEntity create(UserCreateDto userCreateDto) {
-        log.info("create");
         UserEntity userEntity = new UserEntity();
         userEntity.setEmail(userCreateDto.getEmail());
         userEntity.setNickname(userCreateDto.getNickname());
@@ -61,13 +60,12 @@ public class UserService {
         UserEntity userEntity = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Users",id));
         userEntity.setLastLoginAt(Clock.systemUTC().millis());
+        userRepository.save(userEntity);
     }
 
     public void verifyEmail(long id, String certificationCode) {
         UserEntity userEntity = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Users", id));
-        log.info(certificationCode);
-        log.info(userEntity.getCertificationCode());
         if (!certificationCode.equals(userEntity.getCertificationCode())) {
             throw new CertificationCodeNotMatchedException();
         }
