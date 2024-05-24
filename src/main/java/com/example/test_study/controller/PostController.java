@@ -3,11 +3,8 @@ package com.example.test_study.controller;
 import com.example.test_study.model.dto.*;
 import com.example.test_study.service.PostService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
 
 @RestController
 @RequestMapping("/api/v0/posts")
@@ -20,7 +17,7 @@ public class PostController {
     public ResponseEntity<PostResponse> getUserById(@PathVariable("id")  long id) {
         return ResponseEntity
                 .ok()
-                .body(PostResponse.toResponse(postService.getByIdOrElseThrow(id)));
+                .body(PostResponse.toResponse(postService.getBYId(id)));
     }
 
     @PutMapping("/{id}")
@@ -31,7 +28,7 @@ public class PostController {
     ) {
         return ResponseEntity
                 .ok()
-                .body(postService.updatePost(id,userId,request).getId());
+                .body(postService.update(id,userId,request).getId());
     }
 
     @PostMapping("")
@@ -41,6 +38,6 @@ public class PostController {
     ) {
         return ResponseEntity
                 .ok()
-                .body(postService.createPost(request,userId).getId());
+                .body(postService.create(request,userId).getId());
     }
 }

@@ -3,18 +3,13 @@ package com.example.test_study.controller;
 import com.example.test_study.model.dto.UserCreateDto;
 import com.example.test_study.model.dto.UserResponse;
 import com.example.test_study.model.dto.UserUpdateDto;
-import com.example.test_study.repository.UserEntity;
 import com.example.test_study.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
-import org.hibernate.annotations.Parameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v0/users")
@@ -27,7 +22,7 @@ public class UserController {
     public ResponseEntity<UserResponse> getUserById(@PathVariable("id")  long id) {
         return ResponseEntity
                 .ok()
-                .body(UserResponse.toResponse(userService.getByIdOrElseThrow(id)));
+                .body(UserResponse.toResponse(userService.getById(id)));
     }
 
     @GetMapping("/{id}/verify")
@@ -58,7 +53,7 @@ public class UserController {
     ) {
         return ResponseEntity
                 .ok()
-                .body(userService.updateUser(id,request).getId());
+                .body(userService.update(id,request).getId());
     }
 
     @PostMapping("")
@@ -67,7 +62,7 @@ public class UserController {
     ) {
         return ResponseEntity
                 .ok()
-                .body(userService.createUser(request).getId());
+                .body(userService.create(request).getId());
     }
 
 }
