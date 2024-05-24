@@ -1,7 +1,6 @@
 package com.example.test_study.repository;
 
 import com.example.test_study.model.UserStatus;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
