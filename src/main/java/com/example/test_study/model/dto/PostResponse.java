@@ -1,8 +1,6 @@
 package com.example.test_study.model.dto;
 
 import com.example.test_study.repository.PostEntity;
-import com.example.test_study.repository.UserEntity;
-import jakarta.persistence.*;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
@@ -12,14 +10,14 @@ public class PostResponse {
 
     private String content;
 
-    private LocalDateTime createAt;
+    private long createAt;
 
-    private LocalDateTime updateAt;
+    private long updateAt;
 
     private String writer;
 
     @Builder
-    public PostResponse(Long id, String content, LocalDateTime createAt, LocalDateTime updateAt, String writer) {
+    public PostResponse(Long id, String content, long createAt, long updateAt, String writer) {
         this.id = id;
         this.content = content;
         this.createAt = createAt;
@@ -32,7 +30,7 @@ public class PostResponse {
                 .id(postEntity.getId())
                 .writer(postEntity.getWriter().getNickname())
                 .content(postEntity.getContent())
-                .createAt(postEntity.getCreateAt())
+                .createAt(postEntity.getCreatedAt())
                 .updateAt(postEntity.getUpdateAt())
                 .build();
     }

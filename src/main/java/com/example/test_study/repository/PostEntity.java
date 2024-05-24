@@ -1,10 +1,10 @@
 package com.example.test_study.repository;
 
-import com.example.test_study.model.UserStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 @Getter
@@ -19,11 +19,11 @@ public class PostEntity {
     @Column(name="content")
     private String content;
 
-    @Column(name="create_at")
-    private LocalDateTime createAt;
+    @Column(name="created_at")
+    private Long createdAt;
 
     @Column(name="update_at")
-    private LocalDateTime updateAt;
+    private Long updateAt;
 
     @ManyToOne
     @JoinColumn(name="user_id")

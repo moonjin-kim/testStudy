@@ -12,15 +12,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
 public class PostService {
-    PostRepository postRepository;
-    UserRepository userRepository;
+    private final PostRepository postRepository;
+    private final UserRepository userRepository;
 
-    public PostEntity getBYId(long id) {
+    public PostEntity getById(long id) {
         return postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Post", id));
     }
@@ -31,8 +32,7 @@ public class PostService {
                 .orElseThrow(() -> new ResourceNotFoundException("User", userId));
         PostEntity postEntity = new PostEntity();
         postEntity.setContent(request.getContent());
-        postEntity.setCreateAt(LocalDateTime.now());
-        postEntity.setUpdateAt(LocalDateTime.now());
+        postEntity.setCreatedAt(Clock.systemUTC().millis());
         postEntity.setWriter(userEntity);
 
         return postRepository.save(postEntity);

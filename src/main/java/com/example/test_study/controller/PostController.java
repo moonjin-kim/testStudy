@@ -17,7 +17,7 @@ public class PostController {
     public ResponseEntity<PostResponse> getUserById(@PathVariable("id")  long id) {
         return ResponseEntity
                 .ok()
-                .body(PostResponse.toResponse(postService.getBYId(id)));
+                .body(PostResponse.toResponse(postService.getById(id)));
     }
 
     @PutMapping("/{id}")
