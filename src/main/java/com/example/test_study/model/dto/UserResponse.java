@@ -3,7 +3,9 @@ package com.example.test_study.model.dto;
 import com.example.test_study.repository.UserEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
+import lombok.Getter;
 
+@Getter
 public class UserResponse {
     private final Long id;
     private final String email;

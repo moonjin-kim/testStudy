@@ -2,9 +2,11 @@ package com.example.test_study.model.dto;
 
 import com.example.test_study.repository.PostEntity;
 import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class PostResponse {
     private Long id;
 
