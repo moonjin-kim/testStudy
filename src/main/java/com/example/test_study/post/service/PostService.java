@@ -1,13 +1,15 @@
 package com.example.test_study.post.service;
 
 import com.example.test_study.common.domain.exception.ResourceNotFoundException;
+import com.example.test_study.post.service.port.PostRepository;
 import com.example.test_study.user.domain.UserStatus;
 import com.example.test_study.post.domain.PostCreate;
 import com.example.test_study.post.domain.PostUpdate;
 import com.example.test_study.post.infrastructure.PostEntity;
-import com.example.test_study.post.infrastructure.PostRepository;
+import com.example.test_study.post.infrastructure.PostJpaRepository;
 import com.example.test_study.user.infrastructure.UserEntity;
-import com.example.test_study.user.infrastructure.UserRepository;
+import com.example.test_study.user.infrastructure.UserJpaRepository;
+import com.example.test_study.user.service.port.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
