@@ -1,21 +1,12 @@
 package com.example.test_study.service;
 
-import com.example.test_study.exception.CertificationCodeNotMatchedException;
-import com.example.test_study.exception.ResourceNotFoundException;
-import com.example.test_study.model.UserStatus;
-import com.example.test_study.model.dto.PostCreateDto;
-import com.example.test_study.model.dto.PostUpdateDto;
-import com.example.test_study.model.dto.UserCreateDto;
-import com.example.test_study.model.dto.UserUpdateDto;
-import com.example.test_study.repository.PostEntity;
-import com.example.test_study.repository.UserEntity;
+import com.example.test_study.user.domain.dto.PostCreateDto;
+import com.example.test_study.user.domain.dto.PostUpdateDto;
+import com.example.test_study.post.repository.PostEntity;
+import com.example.test_study.user.service.PostService;
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;

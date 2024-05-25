@@ -1,7 +1,9 @@
-package com.example.test_study.controller;
+package com.example.test_study.post.controller;
 
 import com.example.test_study.model.dto.*;
-import com.example.test_study.service.PostService;
+import com.example.test_study.user.domain.dto.PostResponse;
+import com.example.test_study.user.domain.dto.PostUpdateDto;
+import com.example.test_study.user.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +16,14 @@ public class PostController {
 
     @ResponseStatus
     @GetMapping("/{id}")
-    public ResponseEntity<PostResponse> getUserById(@PathVariable("id")  long id) {
+    public ResponseEntity<PostResponse> getById(@PathVariable("id")  long id) {
         return ResponseEntity
                 .ok()
                 .body(PostResponse.toResponse(postService.getById(id)));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PostResponse> updatePost(
+    public ResponseEntity<PostResponse> update(
             @PathVariable("id")  long id,
             @RequestBody PostUpdateDto request
     ) {
@@ -30,13 +32,4 @@ public class PostController {
                 .body(PostResponse.toResponse(postService.update(request,id)));
     }
 
-    @PostMapping("")
-    public ResponseEntity<PostResponse> createUser(
-            @RequestHeader("ID") Long userId,
-            @RequestBody PostCreateDto request
-    ) {
-        return ResponseEntity
-                .ok()
-                .body(PostResponse.toResponse(postService.create(request,userId)));
-    }
 }

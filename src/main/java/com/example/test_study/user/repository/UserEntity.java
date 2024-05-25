@@ -1,6 +1,6 @@
-package com.example.test_study.repository;
+package com.example.test_study.user.repository;
 
-import com.example.test_study.model.UserStatus;
+import com.example.test_study.user.domain.UserStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

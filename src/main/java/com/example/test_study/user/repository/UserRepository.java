@@ -1,6 +1,6 @@
-package com.example.test_study.repository;
+package com.example.test_study.user.repository;
 
-import com.example.test_study.model.UserStatus;
+import com.example.test_study.user.domain.UserStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

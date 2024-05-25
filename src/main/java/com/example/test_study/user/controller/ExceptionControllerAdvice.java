@@ -1,10 +1,10 @@
-package com.example.test_study.controller;
+package com.example.test_study.user.controller;
 
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
-import com.example.test_study.exception.CertificationCodeNotMatchedException;
-import com.example.test_study.exception.ResourceNotFoundException;
+import com.example.test_study.common.domain.exception.CertificationCodeNotMatchedException;
+import com.example.test_study.common.domain.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

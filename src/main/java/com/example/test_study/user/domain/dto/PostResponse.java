@@ -1,10 +1,8 @@
-package com.example.test_study.model.dto;
+package com.example.test_study.user.domain.dto;
 
-import com.example.test_study.repository.PostEntity;
+import com.example.test_study.post.repository.PostEntity;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
 
 @Getter
 public class PostResponse {
@@ -14,16 +12,13 @@ public class PostResponse {
 
     private long createAt;
 
-    private long updateAt;
-
     private UserResponse writer;
 
     @Builder
-    public PostResponse(Long id, String content, long createAt, long updateAt, UserResponse writer) {
+    public PostResponse(Long id, String content, long createAt, UserResponse writer) {
         this.id = id;
         this.content = content;
         this.createAt = createAt;
-        this.updateAt = updateAt;
         this.writer = writer;
     }
 
@@ -33,7 +28,6 @@ public class PostResponse {
                 .writer(UserResponse.toResponse(postEntity.getWriter()))
                 .content(postEntity.getContent())
                 .createAt(postEntity.getCreatedAt())
-                .updateAt(postEntity.getUpdateAt())
                 .build();
     }
 }

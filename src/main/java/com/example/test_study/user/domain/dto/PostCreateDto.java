@@ -1,7 +1,6 @@
-package com.example.test_study.model.dto;
+package com.example.test_study.user.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
 import lombok.Builder;
 import lombok.Getter;
 

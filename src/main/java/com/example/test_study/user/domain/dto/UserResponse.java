@@ -1,7 +1,7 @@
-package com.example.test_study.model.dto;
+package com.example.test_study.user.domain.dto;
 
-import com.example.test_study.repository.UserEntity;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.example.test_study.user.domain.UserStatus;
+import com.example.test_study.user.repository.UserEntity;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,18 +11,21 @@ public class UserResponse {
     private final String email;
     private final String nickname;
     private final String address;
+    private final UserStatus status;
 
     @Builder
     public UserResponse(
             Long id,
             String email,
             String nickname,
-            String address
+            String address,
+            UserStatus status
     ) {
         this.id = id;
         this.email = email;
         this.nickname = nickname;
         this.address = address;
+        this.status = status;
     }
 
     static public UserResponse toResponse(UserEntity userEntity) {
@@ -31,6 +34,7 @@ public class UserResponse {
                 .email(userEntity.getEmail())
                 .nickname(userEntity.getNickname())
                 .address(userEntity.getAddress())
+                .status(userEntity.getStatus())
                 .build();
     }
 }

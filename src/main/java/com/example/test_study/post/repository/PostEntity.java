@@ -1,11 +1,9 @@
-package com.example.test_study.repository;
+package com.example.test_study.post.repository;
 
+import com.example.test_study.user.repository.UserEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.math.BigInteger;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter

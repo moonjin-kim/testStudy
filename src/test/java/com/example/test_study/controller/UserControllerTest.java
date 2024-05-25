@@ -1,11 +1,10 @@
 package com.example.test_study.controller;
 
-import com.example.test_study.model.UserStatus;
-import com.example.test_study.model.dto.UserUpdateDto;
-import com.example.test_study.repository.UserEntity;
-import com.example.test_study.repository.UserRepository;
+import com.example.test_study.user.domain.UserStatus;
+import com.example.test_study.user.domain.dto.UserUpdateDto;
+import com.example.test_study.user.repository.UserEntity;
+import com.example.test_study.user.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

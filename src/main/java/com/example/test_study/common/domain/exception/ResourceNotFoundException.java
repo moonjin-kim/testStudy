@@ -1,4 +1,4 @@
-package com.example.test_study.exception;
+package com.example.test_study.common.domain.exception;
 
 public class ResourceNotFoundException extends RuntimeException{
     public ResourceNotFoundException(String datasource, long id){

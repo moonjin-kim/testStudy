@@ -1,19 +1,18 @@
-package com.example.test_study.service;
+package com.example.test_study.user.service;
 
-import com.example.test_study.exception.ResourceNotFoundException;
-import com.example.test_study.model.UserStatus;
-import com.example.test_study.model.dto.PostCreateDto;
-import com.example.test_study.model.dto.PostUpdateDto;
-import com.example.test_study.repository.PostEntity;
-import com.example.test_study.repository.PostRepository;
-import com.example.test_study.repository.UserEntity;
-import com.example.test_study.repository.UserRepository;
+import com.example.test_study.common.domain.exception.ResourceNotFoundException;
+import com.example.test_study.user.domain.UserStatus;
+import com.example.test_study.user.domain.dto.PostCreateDto;
+import com.example.test_study.user.domain.dto.PostUpdateDto;
+import com.example.test_study.post.repository.PostEntity;
+import com.example.test_study.post.repository.PostRepository;
+import com.example.test_study.user.repository.UserEntity;
+import com.example.test_study.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Clock;
-import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +27,7 @@ public class PostService {
 
     @Transactional
     public PostEntity create(PostCreateDto request, Long userId) {
-        UserEntity userEntity = userRepository.findByIdAndStatus(userId,UserStatus.ACTIVE)
+        UserEntity userEntity = userRepository.findByIdAndStatus(userId, UserStatus.ACTIVE)
                 .orElseThrow(() -> new ResourceNotFoundException("User", userId));
         PostEntity postEntity = new PostEntity();
         postEntity.setContent(request.getContent());

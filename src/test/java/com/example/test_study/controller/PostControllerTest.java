@@ -1,6 +1,6 @@
 package com.example.test_study.controller;
 
-import com.example.test_study.model.dto.PostUpdateDto;
+import com.example.test_study.user.domain.dto.PostUpdateDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

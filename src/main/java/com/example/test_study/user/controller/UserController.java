@@ -1,9 +1,8 @@
-package com.example.test_study.controller;
+package com.example.test_study.user.controller;
 
-import com.example.test_study.model.dto.UserCreateDto;
-import com.example.test_study.model.dto.UserResponse;
-import com.example.test_study.model.dto.UserUpdateDto;
-import com.example.test_study.service.UserService;
+import com.example.test_study.user.domain.dto.UserResponse;
+import com.example.test_study.user.domain.dto.UserUpdateDto;
+import com.example.test_study.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +18,7 @@ public class UserController {
 
     @ResponseStatus
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> getUserById(@PathVariable("id")  long id) {
+    public ResponseEntity<UserResponse> getById(@PathVariable("id")  long id) {
         return ResponseEntity
                 .ok()
                 .body(UserResponse.toResponse(userService.getById(id)));
@@ -47,22 +46,13 @@ public class UserController {
 
 
     @PutMapping("/me")
-    public ResponseEntity<Long> updateUser(
+    public ResponseEntity<Long> update(
             @RequestHeader("ID") Long id,
             @RequestBody UserUpdateDto request
     ) {
         return ResponseEntity
                 .ok()
                 .body(userService.update(id,request).getId());
-    }
-
-    @PostMapping("")
-    public ResponseEntity<Long> createUser(
-            @RequestBody UserCreateDto request
-    ) {
-        return ResponseEntity
-                .ok()
-                .body(userService.create(request).getId());
     }
 
 }
