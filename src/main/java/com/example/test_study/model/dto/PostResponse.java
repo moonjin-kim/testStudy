@@ -16,10 +16,10 @@ public class PostResponse {
 
     private long updateAt;
 
-    private String writer;
+    private UserResponse writer;
 
     @Builder
-    public PostResponse(Long id, String content, long createAt, long updateAt, String writer) {
+    public PostResponse(Long id, String content, long createAt, long updateAt, UserResponse writer) {
         this.id = id;
         this.content = content;
         this.createAt = createAt;
@@ -30,7 +30,7 @@ public class PostResponse {
     static public PostResponse toResponse(PostEntity postEntity) {
         return PostResponse.builder()
                 .id(postEntity.getId())
-                .writer(postEntity.getWriter().getNickname())
+                .writer(UserResponse.toResponse(postEntity.getWriter()))
                 .content(postEntity.getContent())
                 .createAt(postEntity.getCreatedAt())
                 .updateAt(postEntity.getUpdateAt())

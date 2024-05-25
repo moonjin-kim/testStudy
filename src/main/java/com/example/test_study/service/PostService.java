@@ -39,9 +39,7 @@ public class PostService {
     }
 
     @Transactional
-    public PostEntity update(long id, long userId, PostUpdateDto request) {
-        UserEntity userEntity = userRepository.findByIdAndStatus(userId,UserStatus.ACTIVE)
-                .orElseThrow(() -> new ResourceNotFoundException("User", userId));
+    public PostEntity update(PostUpdateDto request, long id) {
         PostEntity postEntity = postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Post", id));
         postEntity.setContent(request.getContent());

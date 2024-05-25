@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v0/posts")
 @RequiredArgsConstructor
 public class PostController {
-    PostService postService;
+    private final PostService postService;
 
     @ResponseStatus
     @GetMapping("/{id}")
@@ -21,23 +21,22 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Long> updatePost(
-            @RequestHeader("ID") Long userId,
+    public ResponseEntity<PostResponse> updatePost(
             @PathVariable("id")  long id,
             @RequestBody PostUpdateDto request
     ) {
         return ResponseEntity
                 .ok()
-                .body(postService.update(id,userId,request).getId());
+                .body(PostResponse.toResponse(postService.update(request,id)));
     }
 
     @PostMapping("")
-    public ResponseEntity<Long> createUser(
+    public ResponseEntity<PostResponse> createUser(
             @RequestHeader("ID") Long userId,
             @RequestBody PostCreateDto request
     ) {
         return ResponseEntity
                 .ok()
-                .body(postService.create(request,userId).getId());
+                .body(PostResponse.toResponse(postService.create(request,userId)));
     }
 }

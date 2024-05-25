@@ -69,7 +69,7 @@ class PostServiceTest {
                 .build();
 
         //when
-        PostEntity result = postService.update(2L,2L,postUpdateDto);
+        PostEntity result = postService.update(postUpdateDto, 2L);
         //then
         PostEntity response = postService.getById(2L);
         assertThat(response.getId()).isNotNull();
