@@ -1,9 +1,9 @@
 package com.example.test_study.controller;
 
 import com.example.test_study.user.domain.UserStatus;
-import com.example.test_study.user.domain.dto.UserUpdateDto;
-import com.example.test_study.user.repository.UserEntity;
-import com.example.test_study.user.repository.UserRepository;
+import com.example.test_study.user.domain.UserUpdate;
+import com.example.test_study.user.infrastructure.UserEntity;
+import com.example.test_study.user.infrastructure.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,7 +99,7 @@ class UserControllerTest {
     @Test
     void 사용자는_내_정보를_수정할_수_있다() throws Exception {
         // given
-        UserUpdateDto userUpdateDto = UserUpdateDto.builder()
+        UserUpdate userUpdate = UserUpdate.builder()
                 .nickname("kok202-n")
                 .address("Pangyo")
                 .build();
@@ -110,7 +110,7 @@ class UserControllerTest {
                         put("/api/v0/users/me")
                                 .header("ID", 2)
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(userUpdateDto)))
+                                .content(objectMapper.writeValueAsString(userUpdate)))
                 .andExpect(status().isOk());
     }
 

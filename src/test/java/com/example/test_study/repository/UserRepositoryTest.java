@@ -1,8 +1,8 @@
 package com.example.test_study.repository;
 
 import com.example.test_study.user.domain.UserStatus;
-import com.example.test_study.user.repository.UserEntity;
-import com.example.test_study.user.repository.UserRepository;
+import com.example.test_study.user.infrastructure.UserEntity;
+import com.example.test_study.user.infrastructure.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

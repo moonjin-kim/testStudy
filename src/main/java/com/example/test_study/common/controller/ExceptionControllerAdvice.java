@@ -1,4 +1,4 @@
-package com.example.test_study.user.controller;
+package com.example.test_study.common.controller;
 
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.NOT_FOUND;

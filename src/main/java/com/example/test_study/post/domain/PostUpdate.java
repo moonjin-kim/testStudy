@@ -1,15 +1,15 @@
-package com.example.test_study.user.domain.dto;
+package com.example.test_study.post.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class PostUpdateDto {
+public class PostUpdate {
     private String content;
 
     @Builder
-    public PostUpdateDto(
+    public PostUpdate(
             @JsonProperty("content") String content
     ) {
         this.content = content;

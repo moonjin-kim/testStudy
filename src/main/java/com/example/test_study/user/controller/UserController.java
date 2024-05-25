@@ -1,7 +1,7 @@
 package com.example.test_study.user.controller;
 
-import com.example.test_study.user.domain.dto.UserResponse;
-import com.example.test_study.user.domain.dto.UserUpdateDto;
+import com.example.test_study.user.controller.response.UserResponse;
+import com.example.test_study.user.domain.UserUpdate;
 import com.example.test_study.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -48,7 +48,7 @@ public class UserController {
     @PutMapping("/me")
     public ResponseEntity<Long> update(
             @RequestHeader("ID") Long id,
-            @RequestBody UserUpdateDto request
+            @RequestBody UserUpdate request
     ) {
         return ResponseEntity
                 .ok()

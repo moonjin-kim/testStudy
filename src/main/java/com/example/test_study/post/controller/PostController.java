@@ -1,9 +1,8 @@
 package com.example.test_study.post.controller;
-
-import com.example.test_study.model.dto.*;
-import com.example.test_study.user.domain.dto.PostResponse;
-import com.example.test_study.user.domain.dto.PostUpdateDto;
-import com.example.test_study.user.service.PostService;
+git
+import com.example.test_study.post.controller.response.PostResponse;
+import com.example.test_study.post.domain.PostUpdate;
+import com.example.test_study.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +24,7 @@ public class PostController {
     @PutMapping("/{id}")
     public ResponseEntity<PostResponse> update(
             @PathVariable("id")  long id,
-            @RequestBody PostUpdateDto request
+            @RequestBody PostUpdate request
     ) {
         return ResponseEntity
                 .ok()

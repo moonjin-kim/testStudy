@@ -1,6 +1,7 @@
-package com.example.test_study.user.domain.dto;
+package com.example.test_study.post.controller.response;
 
-import com.example.test_study.post.repository.PostEntity;
+import com.example.test_study.post.infrastructure.PostEntity;
+import com.example.test_study.user.controller.response.UserResponse;
 import lombok.Builder;
 import lombok.Getter;
 

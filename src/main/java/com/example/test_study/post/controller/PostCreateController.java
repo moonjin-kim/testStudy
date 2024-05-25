@@ -1,8 +1,8 @@
 package com.example.test_study.post.controller;
 
-import com.example.test_study.user.domain.dto.PostCreateDto;
-import com.example.test_study.user.domain.dto.PostResponse;
-import com.example.test_study.user.service.PostService;
+import com.example.test_study.post.domain.PostCreate;
+import com.example.test_study.post.controller.response.PostResponse;
+import com.example.test_study.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class PostCreateController {
     @PostMapping("")
     public ResponseEntity<PostResponse> create(
             @RequestHeader("ID") Long userId,
-            @RequestBody PostCreateDto request
+            @RequestBody PostCreate request
     ) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)

@@ -3,10 +3,10 @@ package com.example.test_study.user.service;
 import com.example.test_study.common.domain.exception.CertificationCodeNotMatchedException;
 import com.example.test_study.common.domain.exception.ResourceNotFoundException;
 import com.example.test_study.user.domain.UserStatus;
-import com.example.test_study.user.domain.dto.UserCreateDto;
-import com.example.test_study.user.domain.dto.UserUpdateDto;
-import com.example.test_study.user.repository.UserEntity;
-import com.example.test_study.user.repository.UserRepository;
+import com.example.test_study.user.domain.UserCreate;
+import com.example.test_study.user.domain.UserUpdate;
+import com.example.test_study.user.infrastructure.UserEntity;
+import com.example.test_study.user.infrastructure.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.SimpleMailMessage;
@@ -35,11 +35,11 @@ public class UserService {
     }
 
     @Transactional
-    public UserEntity create(UserCreateDto userCreateDto) {
+    public UserEntity create(UserCreate userCreate) {
         UserEntity userEntity = new UserEntity();
-        userEntity.setEmail(userCreateDto.getEmail());
-        userEntity.setNickname(userCreateDto.getNickname());
-        userEntity.setAddress(userCreateDto.getAddress());
+        userEntity.setEmail(userCreate.getEmail());
+        userEntity.setNickname(userCreate.getNickname());
+        userEntity.setAddress(userCreate.getAddress());
         userEntity.setStatus(UserStatus.PENDING);
         userEntity.setCertificationCode(UUID.randomUUID().toString());
         userEntity = userRepository.save(userEntity);
@@ -47,10 +47,10 @@ public class UserService {
     }
 
     @Transactional
-    public UserEntity update(long id, UserUpdateDto userUpdateDto) {
+    public UserEntity update(long id, UserUpdate userUpdate) {
         UserEntity userEntity = getById(id);
-        userEntity.setNickname(userUpdateDto.getNickname());
-        userEntity.setAddress(userUpdateDto.getAddress());
+        userEntity.setNickname(userUpdate.getNickname());
+        userEntity.setAddress(userUpdate.getAddress());
         userEntity = userRepository.save(userEntity);
         return userEntity;
     }

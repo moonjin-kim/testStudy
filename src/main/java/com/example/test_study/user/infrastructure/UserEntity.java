@@ -1,4 +1,4 @@
-package com.example.test_study.user.repository;
+package com.example.test_study.user.infrastructure;
 
 import com.example.test_study.user.domain.UserStatus;
 import jakarta.persistence.*;

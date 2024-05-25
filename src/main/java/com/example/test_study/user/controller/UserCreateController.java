@@ -1,7 +1,7 @@
 package com.example.test_study.user.controller;
 
-import com.example.test_study.user.domain.dto.UserCreateDto;
-import com.example.test_study.user.domain.dto.UserResponse;
+import com.example.test_study.user.domain.UserCreate;
+import com.example.test_study.user.controller.response.UserResponse;
 import com.example.test_study.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ public class UserCreateController {
 
     @PostMapping("")
     public ResponseEntity<UserResponse> create(
-            @RequestBody UserCreateDto request
+            @RequestBody UserCreate request
     ) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)

@@ -3,9 +3,9 @@ package com.example.test_study.service;
 import com.example.test_study.common.domain.exception.CertificationCodeNotMatchedException;
 import com.example.test_study.common.domain.exception.ResourceNotFoundException;
 import com.example.test_study.user.domain.UserStatus;
-import com.example.test_study.user.domain.dto.UserCreateDto;
-import com.example.test_study.user.domain.dto.UserUpdateDto;
-import com.example.test_study.user.repository.UserEntity;
+import com.example.test_study.user.domain.UserCreate;
+import com.example.test_study.user.domain.UserUpdate;
+import com.example.test_study.user.infrastructure.UserEntity;
 import com.example.test_study.user.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -85,7 +85,7 @@ class UserServiceTest {
     @Test
     void userCreateDto를_이용하여_유저를_생성할_수_있다(){
         //given
-        UserCreateDto userCreateDto = UserCreateDto.builder()
+        UserCreate userCreate = UserCreate.builder()
                 .email("kok203@kakao.com")
                 .address("Gyeongi")
                 .nickname("kok202-k")
@@ -93,7 +93,7 @@ class UserServiceTest {
         BDDMockito.doNothing().when(mailSender).send(any(SimpleMailMessage.class));
 
         //when
-        UserEntity result = userService.create(userCreateDto);
+        UserEntity result = userService.create(userCreate);
 
         //then
         assertThat(result.getId()).isNotNull();
@@ -104,7 +104,7 @@ class UserServiceTest {
     @Test
     void UserUpdateDto를_이용하여_유저정보를_변경할_수_있다(){
         //given
-        UserUpdateDto userCreateDto = UserUpdateDto.builder()
+        UserUpdate userCreateDto = UserUpdate.builder()
                 .address("Gyeongi")
                 .nickname("kok202-n")
                 .build();
