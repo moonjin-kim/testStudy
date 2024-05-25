@@ -1,4 +1,4 @@
-package com.example.test_study.controller;
+package com.example.test_study.user.controller;
 
 import com.example.test_study.user.domain.UserCreate;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,5 +1,5 @@
 package com.example.test_study.post.controller;
-git
+
 import com.example.test_study.post.controller.response.PostResponse;
 import com.example.test_study.post.domain.PostUpdate;
 import com.example.test_study.post.service.PostService;
