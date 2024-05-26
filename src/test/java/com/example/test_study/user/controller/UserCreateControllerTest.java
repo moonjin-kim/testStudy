@@ -1,23 +1,17 @@
 package com.example.test_study.user.controller;
 
 import com.example.test_study.mock.TestContainer;
-import com.example.test_study.user.controller.port.UserReadService;
 import com.example.test_study.user.controller.response.UserResponse;
-import com.example.test_study.user.domain.User;
 import com.example.test_study.user.domain.UserCreate;
 import com.example.test_study.user.domain.UserStatus;
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
 import org.springframework.http.HttpStatusCode;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class UserCreateControllerTest {
     @Test

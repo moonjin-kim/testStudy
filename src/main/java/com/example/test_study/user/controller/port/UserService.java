@@ -8,7 +8,7 @@ public interface UserService {
     public User getByEmail(String email);
     public User getById(long id);
     public User create(UserCreate userCreate);
-    public void login(String email);
+    public void login(long id);
     public void verifyEmail(long id, String certificationCode);
     public User update(long id, UserUpdate userUpdate);
 }

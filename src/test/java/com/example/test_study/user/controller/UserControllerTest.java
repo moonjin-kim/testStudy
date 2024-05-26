@@ -2,9 +2,7 @@ package com.example.test_study.user.controller;
 
 import com.example.test_study.common.domain.exception.CertificationCodeNotMatchedException;
 import com.example.test_study.common.domain.exception.ResourceNotFoundException;
-import com.example.test_study.common.service.ClockHolder;
 import com.example.test_study.mock.TestContainer;
-import com.example.test_study.user.controller.port.UserReadService;
 import com.example.test_study.user.controller.response.MyProfileResponse;
 import com.example.test_study.user.controller.response.UserResponse;
 import com.example.test_study.user.domain.User;

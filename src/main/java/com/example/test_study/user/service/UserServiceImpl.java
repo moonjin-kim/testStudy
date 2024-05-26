@@ -3,10 +3,7 @@ package com.example.test_study.user.service;
 import com.example.test_study.common.domain.exception.ResourceNotFoundException;
 import com.example.test_study.common.service.ClockHolder;
 import com.example.test_study.common.service.UuidHolder;
-import com.example.test_study.user.controller.port.AuthenticationService;
-import com.example.test_study.user.controller.port.UserCreateService;
-import com.example.test_study.user.controller.port.UserReadService;
-import com.example.test_study.user.controller.port.UserUpdateService;
+import com.example.test_study.user.controller.port.UserService;
 import com.example.test_study.user.domain.User;
 import com.example.test_study.user.domain.UserStatus;
 import com.example.test_study.user.domain.UserCreate;
@@ -23,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Builder
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserCreateService,UserReadService, UserUpdateService, AuthenticationService {
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final CertificationService certificationService;
     private final UuidHolder uuidHolder;

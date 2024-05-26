@@ -1,7 +1,7 @@
 package com.example.test_study.user.controller;
 
-import com.example.test_study.user.controller.port.UserCreateService;
-import com.example.test_study.user.controller.port.UserReadService;
+import com.example.test_study.user.controller.port.UserService;
+import com.example.test_study.user.domain.User;
 import com.example.test_study.user.domain.UserCreate;
 import com.example.test_study.user.controller.response.UserResponse;
 import lombok.Builder;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Builder
 public class UserCreateController {
 
-    private final UserCreateService userCreateService;
+    private final UserService userService;
 
     @PostMapping("")
     public ResponseEntity<UserResponse> create(
@@ -27,6 +27,6 @@ public class UserCreateController {
     ) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(UserResponse.from(userCreateService.create(request)));
+                .body(UserResponse.from(userService.create(request)));
     }
 }
