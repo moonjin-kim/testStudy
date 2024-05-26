@@ -1,6 +1,8 @@
 package com.example.test_study.user.domain;
 
 import com.example.test_study.common.domain.exception.CertificationCodeNotMatchedException;
+import com.example.test_study.common.service.ClockHolder;
+import com.example.test_study.common.service.UuidHolder;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -27,13 +29,13 @@ public class User {
         this.lastLoginAt = lastLoginAt;
     }
 
-    public static User from(UserCreate userCreate) {
+    public static User from(UserCreate userCreate, UuidHolder uuidHolder) {
         return User.builder()
                 .email(userCreate.getEmail())
                 .nickname(userCreate.getNickname())
                 .address(userCreate.getAddress())
                 .status(UserStatus.PENDING)
-                .certificationCode(UUID.randomUUID().toString())
+                .certificationCode(uuidHolder.random())
                 .build();
     }
 
@@ -49,7 +51,7 @@ public class User {
                 .build();
     }
 
-    public User login(Long loginAt) {
+    public User login(ClockHolder clockHolder) {
         return User.builder()
                 .id(id)
                 .email(email)
@@ -57,7 +59,7 @@ public class User {
                 .address(address)
                 .certificationCode(certificationCode)
                 .status(status)
-                .lastLoginAt(loginAt)
+                .lastLoginAt(clockHolder.millis())
                 .build();
     }
 

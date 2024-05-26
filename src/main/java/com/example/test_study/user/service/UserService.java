@@ -1,6 +1,8 @@
 package com.example.test_study.user.service;
 
 import com.example.test_study.common.domain.exception.ResourceNotFoundException;
+import com.example.test_study.common.service.ClockHolder;
+import com.example.test_study.common.service.UuidHolder;
 import com.example.test_study.user.domain.User;
 import com.example.test_study.user.domain.UserStatus;
 import com.example.test_study.user.domain.UserCreate;
@@ -19,6 +21,8 @@ import java.time.Clock;
 public class UserService {
     private final UserRepository userRepository;
     private final CertificationService certificationService;
+    private final UuidHolder uuidHolder;
+    private final ClockHolder clockHolder;
 
     public User getByEmail(String email) {
         return userRepository.findByEmailAndStatus(email, UserStatus.ACTIVE)
@@ -32,7 +36,7 @@ public class UserService {
 
     @Transactional
     public User create(UserCreate userCreate) {
-        User user = userRepository.save(User.from(userCreate));
+        User user = userRepository.save(User.from(userCreate, uuidHolder));
         certificationService.send(
                 user.getEmail(),
                 user.getId(),
@@ -51,7 +55,7 @@ public class UserService {
     public void login(long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Users",id));
-        user = user.login(Clock.systemUTC().millis());
+        user = user.login(clockHolder);
         userRepository.save(user);
     }
 
