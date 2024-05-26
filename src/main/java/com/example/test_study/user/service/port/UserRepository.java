@@ -1,16 +1,16 @@
 package com.example.test_study.user.service.port;
 
+import com.example.test_study.user.domain.User;
 import com.example.test_study.user.domain.UserStatus;
-import com.example.test_study.user.infrastructure.UserEntity;
 
 import java.util.Optional;
 
 public interface UserRepository {
-    Optional<UserEntity> findByEmailAndStatus(String email, UserStatus userStatus);
+    Optional<User> findByEmailAndStatus(String email, UserStatus userStatus);
 
-    Optional<UserEntity> findByIdAndStatus(long id, UserStatus userStatus);
+    Optional<User> findByIdAndStatus(long id, UserStatus userStatus);
 
-    UserEntity save(UserEntity userEntity);
+    User save(User user);
 
-    Optional<UserEntity> findById(long id);
+    Optional<User> findById(long id);
 }

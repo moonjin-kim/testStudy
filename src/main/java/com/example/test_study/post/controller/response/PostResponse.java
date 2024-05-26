@@ -1,6 +1,6 @@
 package com.example.test_study.post.controller.response;
 
-import com.example.test_study.post.infrastructure.PostEntity;
+import com.example.test_study.post.domain.Post;
 import com.example.test_study.user.controller.response.UserResponse;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,12 +23,12 @@ public class PostResponse {
         this.writer = writer;
     }
 
-    static public PostResponse toResponse(PostEntity postEntity) {
+    static public PostResponse from(Post post) {
         return PostResponse.builder()
-                .id(postEntity.getId())
-                .writer(UserResponse.toResponse(postEntity.getWriter()))
-                .content(postEntity.getContent())
-                .createAt(postEntity.getCreatedAt())
+                .id(post.getId())
+                .writer(UserResponse.from(post.getWriter()))
+                .content(post.getContent())
+                .createAt(post.getCreatedAt())
                 .build();
     }
 }

@@ -1,7 +1,9 @@
 package com.example.test_study.post.service;
 
 import com.example.test_study.common.domain.exception.ResourceNotFoundException;
+import com.example.test_study.post.domain.Post;
 import com.example.test_study.post.service.port.PostRepository;
+import com.example.test_study.user.domain.User;
 import com.example.test_study.user.domain.UserStatus;
 import com.example.test_study.post.domain.PostCreate;
 import com.example.test_study.post.domain.PostUpdate;
@@ -22,28 +24,24 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
 
-    public PostEntity getById(long id) {
+    public Post getById(long id) {
         return postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Post", id));
     }
 
     @Transactional
-    public PostEntity create(PostCreate request, Long userId) {
-        UserEntity userEntity = userRepository.findByIdAndStatus(userId, UserStatus.ACTIVE)
+    public Post create(PostCreate requestCreate, Long userId) {
+        User writer = userRepository.findByIdAndStatus(userId, UserStatus.ACTIVE)
                 .orElseThrow(() -> new ResourceNotFoundException("User", userId));
-        PostEntity postEntity = new PostEntity();
-        postEntity.setContent(request.getContent());
-        postEntity.setCreatedAt(Clock.systemUTC().millis());
-        postEntity.setWriter(userEntity);
-
-        return postRepository.save(postEntity);
+        Post post = Post.from(writer,requestCreate);
+        return postRepository.save(post);
     }
 
     @Transactional
-    public PostEntity update(PostUpdate request, long id) {
-        PostEntity postEntity = postRepository.findById(id)
+    public Post update(PostUpdate request, long id) {
+        Post post = postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Post", id));
-        postEntity.setContent(request.getContent());
-        return postRepository.save(postEntity);
+        post = post.update(request);
+        return postRepository.save(post);
     }
 }

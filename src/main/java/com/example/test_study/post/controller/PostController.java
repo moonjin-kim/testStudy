@@ -18,7 +18,7 @@ public class PostController {
     public ResponseEntity<PostResponse> getById(@PathVariable("id")  long id) {
         return ResponseEntity
                 .ok()
-                .body(PostResponse.toResponse(postService.getById(id)));
+                .body(PostResponse.from(postService.getById(id)));
     }
 
     @PutMapping("/{id}")
@@ -28,7 +28,7 @@ public class PostController {
     ) {
         return ResponseEntity
                 .ok()
-                .body(PostResponse.toResponse(postService.update(request,id)));
+                .body(PostResponse.from(postService.update(request,id)));
     }
 
 }

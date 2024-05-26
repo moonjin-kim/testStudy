@@ -1,5 +1,6 @@
 package com.example.test_study.user.controller;
 
+import com.example.test_study.user.controller.response.MyProfileResponse;
 import com.example.test_study.user.controller.response.UserResponse;
 import com.example.test_study.user.domain.UserUpdate;
 import com.example.test_study.user.service.UserService;
@@ -21,7 +22,7 @@ public class UserController {
     public ResponseEntity<UserResponse> getById(@PathVariable("id")  long id) {
         return ResponseEntity
                 .ok()
-                .body(UserResponse.toResponse(userService.getById(id)));
+                .body(UserResponse.from(userService.getById(id)));
     }
 
     @GetMapping("/{id}/verify")
@@ -36,12 +37,12 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<UserResponse> getMyInfo(
+    public ResponseEntity<MyProfileResponse> getMyInfo(
             @RequestHeader("EMAIL") String email
     ) {
         return ResponseEntity
                 .ok()
-                .body(UserResponse.toResponse(userService.getByEmail(email)));
+                .body(MyProfileResponse.from(userService.getByEmail(email)));
     }
 
 
