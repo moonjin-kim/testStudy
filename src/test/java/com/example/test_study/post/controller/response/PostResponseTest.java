@@ -22,8 +22,10 @@ class PostResponseTest {
                         .nickname("test202")
                         .address("Ulsan")
                         .status(UserStatus.ACTIVE)
+                        .lastLoginAt(0L)
                         .certificationCode("aaaaaaaa-aaaa-aaaa-aaaaaaaa1aaa")
                         .build())
+                .updateAt(0L)
                 .createdAt(Clock.systemUTC().millis())
                 .build();
 

@@ -2,13 +2,11 @@ package com.example.test_study.medinum.service;
 
 import com.example.test_study.mock.FakeMailSender;
 import com.example.test_study.user.service.CertificationService;
-import com.example.test_study.user.service.port.MailSender;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-class CertificationServiceTest {
+class CertificationServiceImplTest {
     @Test
     public void 이메일과_컨텐츠가_제대로_만들어져서_보내지는지_테스트한다() {
         //given

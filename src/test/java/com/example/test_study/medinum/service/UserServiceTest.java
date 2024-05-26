@@ -6,8 +6,7 @@ import com.example.test_study.user.domain.User;
 import com.example.test_study.user.domain.UserStatus;
 import com.example.test_study.user.domain.UserCreate;
 import com.example.test_study.user.domain.UserUpdate;
-import com.example.test_study.user.infrastructure.UserEntity;
-import com.example.test_study.user.service.UserService;
+import com.example.test_study.user.service.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ import static org.mockito.ArgumentMatchers.any;
 class UserServiceTest {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
     @MockBean
     private JavaMailSender mailSender;
 
@@ -42,7 +41,7 @@ class UserServiceTest {
         String email = "kok202@naver.com";
 
         //when
-        User result = userService.getByEmail(email);
+        User result = userServiceImpl.getByEmail(email);
 
         //then
         assertThat(result.getNickname()).isEqualTo("test202");
@@ -56,7 +55,7 @@ class UserServiceTest {
         //when
         //then
         assertThatThrownBy(() -> {
-            User result = userService.getByEmail(email);
+            User result = userServiceImpl.getByEmail(email);
         }).isInstanceOf(ResourceNotFoundException.class);
     }
 
@@ -66,7 +65,7 @@ class UserServiceTest {
         Long id = 2L;
 
         //when
-        User result = userService.getById(id);
+        User result = userServiceImpl.getById(id);
 
         //then
         assertThat(result.getNickname()).isEqualTo("test202");
@@ -79,7 +78,7 @@ class UserServiceTest {
 
         //then
         assertThatThrownBy(() -> {
-            User result = userService.getById(id);
+            User result = userServiceImpl.getById(id);
         }).isInstanceOf(ResourceNotFoundException.class);
     }
 
@@ -94,7 +93,7 @@ class UserServiceTest {
         BDDMockito.doNothing().when(mailSender).send(any(SimpleMailMessage.class));
 
         //when
-        User result = userService.create(userCreate);
+        User result = userServiceImpl.create(userCreate);
 
         //then
         assertThat(result.getId()).isNotNull();
@@ -112,10 +111,10 @@ class UserServiceTest {
         BDDMockito.doNothing().when(mailSender).send(any(SimpleMailMessage.class));
 
         //when
-        User result = userService.update(2,userCreateDto);
+        User result = userServiceImpl.update(2,userCreateDto);
 
         //then
-        User userEntity = userService.getById(2);
+        User userEntity = userServiceImpl.getById(2);
         assertThat(userEntity.getLastLoginAt()).isNotNull();
         assertThat(userEntity.getAddress()).isEqualTo("Gyeongi");
         assertThat(userEntity.getNickname()).isEqualTo("kok202-n");
@@ -126,10 +125,10 @@ class UserServiceTest {
     void user을_로그인_시키면_마지막_로그인_시간이_변경된다(){
         //given
         //when
-        userService.login(2);
+        userServiceImpl.login(2);
 
         //then
-        User user = userService.getById(2);
+        User user = userServiceImpl.getById(2);
         assertThat(user.getLastLoginAt()).isGreaterThan(0);
         // assertThat(result.getCertificationCode()).isEqualTo(UserStatus.PENDING);
     }
@@ -138,10 +137,10 @@ class UserServiceTest {
     void PENDING_상태의_사용자는_인증_코드로_ACTIVE_시킬_수_있다(){
         //given
         //when
-        userService.verifyEmail(3,"aaaaaaaa-aaaa-aaaa-aaaaaaaaaa1a");
+        userServiceImpl.verifyEmail(3,"aaaaaaaa-aaaa-aaaa-aaaaaaaaaa1a");
 
         //then
-        User user = userService.getById(3);
+        User user = userServiceImpl.getById(3);
         assertThat(user.getStatus()).isEqualTo(UserStatus.ACTIVE);
         // assertThat(result.getCertificationCode()).isEqualTo(UserStatus.PENDING);
     }
@@ -152,7 +151,7 @@ class UserServiceTest {
         //when
         //then
         assertThatThrownBy(() -> {
-            userService.verifyEmail(3,"aaaaaaaa-aaaa-aaaa-aaaaaaaaaaca");
+            userServiceImpl.verifyEmail(3,"aaaaaaaa-aaaa-aaaa-aaaaaaaaaaca");
         }).isInstanceOf(CertificationCodeNotMatchedException.class);
     }
 

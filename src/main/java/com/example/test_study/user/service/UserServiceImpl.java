@@ -3,10 +3,15 @@ package com.example.test_study.user.service;
 import com.example.test_study.common.domain.exception.ResourceNotFoundException;
 import com.example.test_study.common.service.ClockHolder;
 import com.example.test_study.common.service.UuidHolder;
+import com.example.test_study.user.controller.port.AuthenticationService;
+import com.example.test_study.user.controller.port.UserCreateService;
+import com.example.test_study.user.controller.port.UserReadService;
+import com.example.test_study.user.controller.port.UserUpdateService;
 import com.example.test_study.user.domain.User;
 import com.example.test_study.user.domain.UserStatus;
 import com.example.test_study.user.domain.UserCreate;
 import com.example.test_study.user.domain.UserUpdate;
+import com.example.test_study.user.service.port.CertificationService;
 import com.example.test_study.user.service.port.UserRepository;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
@@ -14,13 +19,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Clock;
-
 @Service
 @Slf4j
 @Builder
 @RequiredArgsConstructor
-public class UserService {
+public class UserServiceImpl implements UserCreateService,UserReadService, UserUpdateService, AuthenticationService {
     private final UserRepository userRepository;
     private final CertificationService certificationService;
     private final UuidHolder uuidHolder;

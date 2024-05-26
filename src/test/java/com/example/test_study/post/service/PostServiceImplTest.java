@@ -6,23 +6,22 @@ import com.example.test_study.post.domain.PostCreate;
 import com.example.test_study.post.domain.PostUpdate;
 import com.example.test_study.user.domain.User;
 import com.example.test_study.user.domain.UserStatus;
-import com.example.test_study.user.service.port.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PostServiceTest {
+class PostServiceImplTest {
 
     @Autowired
-    private PostService postService;
+    private PostServiceImpl postServiceImpl;
     @BeforeEach
     void init() {
 
         FakePostRepository fakePostRepository = new FakePostRepository();
         FakeUserRepository fakeUserRepository = new FakeUserRepository();
-        this.postService = PostService.builder()
+        this.postServiceImpl = PostServiceImpl.builder()
                 .clockHolder(new TestClockHolder(12341234L))
                 .postRepository(fakePostRepository)
                 .userRepository(fakeUserRepository)
@@ -64,7 +63,7 @@ class PostServiceTest {
     void getById는_존재하는_게시물을_조회_가능하다(){
         //given
         //when
-        Post result = postService.getById(1L);
+        Post result = postServiceImpl.getById(1L);
 
         //then
         assertThat(result.getId()).isEqualTo(1L);
@@ -81,9 +80,9 @@ class PostServiceTest {
                 .build();
 
         //when
-        Post result = postService.create(postCreate,1L);
+        Post result = postServiceImpl.create(postCreate,1L);
         //then
-        Post response = postService.getById(1L);
+        Post response = postServiceImpl.getById(1L);
         assertThat(response.getId()).isEqualTo(1L);
         assertThat(response.getContent()).isEqualTo("helloWorld");
         assertThat(response.getCreatedAt()).isEqualTo(12341234L);
@@ -97,9 +96,9 @@ class PostServiceTest {
                 .build();
 
         //when
-        Post result = postService.update(postUpdate, 1L);
+        Post result = postServiceImpl.update(postUpdate, 1L);
         //then
-        Post response = postService.getById(1L);
+        Post response = postServiceImpl.getById(1L);
         assertThat(response.getId()).isEqualTo(1L);
         assertThat(response.getContent()).isEqualTo("test");
         assertThat(response.getUpdateAt()).isEqualTo(12341234L);

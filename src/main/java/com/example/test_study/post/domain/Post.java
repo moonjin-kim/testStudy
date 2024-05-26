@@ -31,6 +31,7 @@ public class Post {
         return Post.builder()
                 .content(postCreate.getContent())
                 .writer(writer)
+                .updateAt(0L)
                 .createdAt(clockHolder.millis())
                 .build();
     }

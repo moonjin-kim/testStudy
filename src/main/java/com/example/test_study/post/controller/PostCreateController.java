@@ -1,8 +1,10 @@
 package com.example.test_study.post.controller;
 
+import com.example.test_study.post.controller.port.PostService;
 import com.example.test_study.post.domain.PostCreate;
 import com.example.test_study.post.controller.response.PostResponse;
-import com.example.test_study.post.service.PostService;
+import com.example.test_study.post.service.PostServiceImpl;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v0/posts")
 @RequiredArgsConstructor
+@Builder
 public class PostCreateController {
 
     private final PostService postService;

@@ -3,8 +3,7 @@ package com.example.test_study.medinum.service;
 import com.example.test_study.post.domain.Post;
 import com.example.test_study.post.domain.PostCreate;
 import com.example.test_study.post.domain.PostUpdate;
-import com.example.test_study.post.infrastructure.PostEntity;
-import com.example.test_study.post.service.PostService;
+import com.example.test_study.post.service.PostServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,16 +21,16 @@ import static org.mockito.ArgumentMatchers.any;
         @Sql(value = "/sql/post-service-test-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
         @Sql(value = "/sql/delete-all-data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 })
-class PostServiceTest {
+class PostServiceImplTest {
 
     @Autowired
-    private PostService postService;
+    private PostServiceImpl postServiceImpl;
 
     @Test
     void getById는_존재하는_게시물을_조회_가능하다(){
         //given
         //when
-        Post result = postService.getById(2L);
+        Post result = postServiceImpl.getById(2L);
 
         //then
         assertThat(result.getId()).isEqualTo(2L);
@@ -45,9 +44,9 @@ class PostServiceTest {
                 .build();
 
         //when
-        Post result = postService.create(postCreate,2L);
+        Post result = postServiceImpl.create(postCreate,2L);
         //then
-        Post response = postService.getById(1L);
+        Post response = postServiceImpl.getById(1L);
         assertThat(response.getId()).isNotNull();
         assertThat(response.getContent()).isEqualTo("test");
         assertThat(response.getCreatedAt()).isGreaterThan(0);
@@ -61,9 +60,9 @@ class PostServiceTest {
                 .build();
 
         //when
-        Post result = postService.update(postUpdate, 2L);
+        Post result = postServiceImpl.update(postUpdate, 2L);
         //then
-        Post response = postService.getById(2L);
+        Post response = postServiceImpl.getById(2L);
         assertThat(response.getId()).isNotNull();
         assertThat(response.getContent()).isEqualTo("test");
         assertThat(response.getUpdateAt()).isGreaterThan(0);
