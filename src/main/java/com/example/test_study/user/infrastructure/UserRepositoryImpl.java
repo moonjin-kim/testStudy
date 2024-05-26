@@ -1,5 +1,6 @@
 package com.example.test_study.user.infrastructure;
 
+import com.example.test_study.common.domain.exception.ResourceNotFoundException;
 import com.example.test_study.user.domain.User;
 import com.example.test_study.user.domain.UserStatus;
 import com.example.test_study.user.service.port.UserRepository;
@@ -13,6 +14,17 @@ import java.util.Optional;
 public class UserRepositoryImpl implements UserRepository {
 
     private final UserJpaRepository userJpaRepository;
+
+    @Override
+    public User getById(long id) {
+        return findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Users", id)
+        );
+    }
+    @Override
+    public Optional<User> findById(long id) {
+        return userJpaRepository.findById(id).map(UserEntity::toModel);
+    }
 
     @Override
     public Optional<User> findByEmailAndStatus(String email, UserStatus userStatus) {
@@ -29,8 +41,6 @@ public class UserRepositoryImpl implements UserRepository {
         return userJpaRepository.save(UserEntity.fromModel(User)).toModel();
     }
 
-    @Override
-    public Optional<User> findById(long id) {
-        return userJpaRepository.findById(id).map(UserEntity::toModel);
-    }
+
+
 }

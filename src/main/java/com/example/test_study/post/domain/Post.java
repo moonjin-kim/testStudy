@@ -1,5 +1,6 @@
 package com.example.test_study.post.domain;
 
+import com.example.test_study.common.service.ClockHolder;
 import com.example.test_study.post.infrastructure.PostEntity;
 import com.example.test_study.user.domain.User;
 import com.example.test_study.user.domain.UserCreate;
@@ -26,20 +27,20 @@ public class Post {
         this.writer = writer;
     }
 
-    public static Post from(User writer, PostCreate postCreate) {
+    public static Post from(User writer, PostCreate postCreate, ClockHolder clockHolder) {
         return Post.builder()
                 .content(postCreate.getContent())
                 .writer(writer)
-                .createdAt(Clock.systemUTC().millis())
+                .createdAt(clockHolder.millis())
                 .build();
     }
 
-    public Post update(PostUpdate postUpdate) {
+    public Post update(PostUpdate postUpdate, ClockHolder clockHolder) {
         return Post.builder()
                 .id(id)
                 .content(postUpdate.getContent())
                 .writer(writer)
-                .updateAt(Clock.systemUTC().millis())
+                .updateAt(clockHolder.millis())
                 .createdAt(createdAt)
                 .build();
     }
