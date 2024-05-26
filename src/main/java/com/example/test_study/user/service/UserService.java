@@ -8,6 +8,7 @@ import com.example.test_study.user.domain.UserStatus;
 import com.example.test_study.user.domain.UserCreate;
 import com.example.test_study.user.domain.UserUpdate;
 import com.example.test_study.user.service.port.UserRepository;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.time.Clock;
 
 @Service
 @Slf4j
+@Builder
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;

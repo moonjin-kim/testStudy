@@ -1,4 +1,4 @@
-package com.example.test_study.post.controller;
+package com.example.test_study.medinum.controller;
 
 import com.example.test_study.post.domain.PostUpdate;
 import com.fasterxml.jackson.databind.ObjectMapper;

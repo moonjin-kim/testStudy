@@ -1,4 +1,4 @@
-package com.example.test_study.user.controller;
+package com.example.test_study.medinum.controller;
 
 import com.example.test_study.user.domain.UserStatus;
 import com.example.test_study.user.domain.UserUpdate;

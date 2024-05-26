@@ -1,4 +1,4 @@
-package com.example.test_study.post.service;
+package com.example.test_study.medinum.service;
 
 import com.example.test_study.post.domain.Post;
 import com.example.test_study.post.domain.PostCreate;
